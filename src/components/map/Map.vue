@@ -1,13 +1,14 @@
 <template>
   <div class="map-wrapper">
     <l-map :zoom="zoom" :center="coordinates">
-      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-marker :lat-lng="coordinates"></l-marker>
+      <l-tile-layer :url="url"></l-tile-layer>
+      <l-marker :lat-lng="coordinates" :icon="icon"></l-marker>
     </l-map>
   </div>
 </template>
 <script>
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import { icon } from 'leaflet';
 
 export default {
   components: {
@@ -18,9 +19,12 @@ export default {
   props: ['coordinates'],
   data: () => ({
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution:
-      '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     zoom: 3,
+    icon: icon({
+      iconUrl: '/marker.png',
+      iconSize: [32, 50],
+      iconAnchor: [16, 37],
+    }),
   }),
 };
 </script>
